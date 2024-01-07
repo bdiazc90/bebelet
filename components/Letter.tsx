@@ -20,8 +20,10 @@ export default function Letter({ letter }: Props) {
 		router.push(`/letters/${newLetter}`);
 	};
 	return (
-		<h1 onClick={clickSetLetter} className="text-[50vh]/[0.8] lg:text-[80vh]/[0.8] text-center select-none font-extrabold drop-shadow-[0px_0px_10px_#edaeff] text-blue-950 dark:drop-shadow-[0px_0px_10px_#5a1599] dark:text-yellow-50">
-			{letter.toUpperCase()}
-		</h1>
+		<div className="w-full cursor-pointer" onClick={clickSetLetter}>
+			<h1 className="text-[50vh]/[0.8] lg:text-[80vh]/[0.8] text-center select-none font-extrabold drop-shadow-[0px_0px_10px_#edaeff] text-blue-950 dark:drop-shadow-[0px_0px_10px_#5a1599] dark:text-yellow-50">
+				{letter.toUpperCase()}
+			</h1>
+		</div>
 	);
 }
