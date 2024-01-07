@@ -20,7 +20,7 @@ export default function Number({ number }: Props) {
 		router.push(`/numbers/${newNumber}`);
 	};
 	return (
-		<h1 onClick={clickSetnumber} className="text-[65vh]/[0.8] lg:text-[80vh]/[0.8] text-center select-none font-extrabold drop-shadow-[0px_0px_10px_#edaeff] text-green-950 dark:drop-shadow-[0px_0px_10px_#5a1599] dark:text-yellow-50">
+		<h1 onClick={clickSetnumber} className="text-[50vh]/[0.8] lg:text-[80vh]/[0.8] text-center select-none font-extrabold drop-shadow-[0px_0px_10px_#edaeff] text-green-950 dark:drop-shadow-[0px_0px_10px_#5a1599] dark:text-yellow-50">
 			{number}
 		</h1>
 	);
