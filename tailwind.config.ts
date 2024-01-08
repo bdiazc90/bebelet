@@ -14,6 +14,7 @@ const config: Config = {
 			},
 			animation: {
 				text: "text 5s ease infinite",
+				button: "background 3s ease infinite",
 			},
 			keyframes: {
 				text: {
@@ -26,9 +27,30 @@ const config: Config = {
 						"background-position": "right center",
 					},
 				},
+				background: {
+					"0%, 100%": {
+						"background-size": "200% 200%",
+						"background-position": "left center",
+					},
+					"50%": {
+						"background-size": "200% 200%",
+						"background-position": "right center",
+					},
+				},
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require("daisyui")],
+	daisyui: {
+		themes: [
+		  {
+			bebelet: {
+			  "primary": "#7CDEDC",
+			  "secondary": "#8367C7",
+			  "accent": "#FA8334",
+			},
+		  },
+		],
+	  },
 };
 export default config;

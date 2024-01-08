@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 function randomIntFromInterval(min: number, max: number): number {
 	return Math.floor(Math.random() * (max - min + 1) + min);
@@ -13,17 +13,19 @@ type Props = {
 };
 
 export default function Letter({ letter }: Props) {
-	const router = useRouter();
+	const [tempLetter, setTempLetter] = useState(letter);
 
 	const clickSetLetter = () => {
 		const newLetter = letters.at(randomIntFromInterval(0, 25))?.toLowerCase();
-		router.push(`/letters/${newLetter}`);
+		if (newLetter !== undefined) {
+			setTempLetter(newLetter);
+			window.history.pushState({}, "", '/letters/' + newLetter);
+		}
 	};
+
 	return (
 		<div className="w-full cursor-pointer" onClick={clickSetLetter}>
-			<h1 className="text-[50vh]/[0.8] lg:text-[80vh]/[0.8] text-center select-none font-extrabold drop-shadow-[0px_0px_10px_#edaeff] text-blue-950 dark:drop-shadow-[0px_0px_10px_#5a1599] dark:text-yellow-50">
-				{letter.toUpperCase()}
-			</h1>
+			<h1 className="text-[50vh]/[0.8] lg:text-[80vh]/[0.8] text-center select-none font-extrabold drop-shadow-[0px_0px_10px_#edaeff] text-blue-950 dark:drop-shadow-[0px_0px_10px_#5a1599] dark:text-yellow-50">{tempLetter.toUpperCase()}</h1>
 		</div>
 	);
 }
