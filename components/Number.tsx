@@ -6,16 +6,20 @@ import { randomIntFromInterval } from "@/lib/utils";
 
 type Props = {
 	number: string;
-	numbers: Array<string>;
+	defaultNumbers: Array<string>;
 };
 
-export default function Number({ number, numbers }: Props) {
+export default function Number({ number, defaultNumbers }: Props) {
 	const [tempNumber, setTempNumber] = useState(number);
 
 	const clickSetnumber = () => {
-		const max_qty = numbers.length - 1;
+		const lsNumbers = localStorage.getItem("bbl.numbers");
+		const currentNumbers = lsNumbers ? JSON.parse(lsNumbers) : defaultNumbers;
+		localStorage.setItem("bbl.numbers", JSON.stringify(currentNumbers));
+
+		const max_qty = currentNumbers.length - 1;
 		const randomIndex = randomIntFromInterval(0, max_qty);
-		const newNumber = numbers.at(randomIndex);
+		const newNumber = currentNumbers.at(randomIndex);
 		if (newNumber === undefined) return;
 		setTempNumber(newNumber);
 		window.history.pushState({}, "", "/numbers/" + newNumber);

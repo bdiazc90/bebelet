@@ -1,13 +1,18 @@
+'use client';
+
 import { redirect } from 'next/navigation';
 
-import { all_letters } from '@/lib/data';
+import { all_letters as defaultLetters } from '@/lib/data';
 import { randomIntFromInterval } from '@/lib/utils';
 
-const letters = all_letters;
-const max_qty = letters.length - 1;
+const lsLetters = localStorage.getItem("bbl.letters");
+const currentLetters = lsLetters ? JSON.parse(lsLetters) : defaultLetters;
+localStorage.setItem("bbl.letters", JSON.stringify(currentLetters));
+
+const max_qty = currentLetters.length - 1;
 
 export default function PageLetters() {
     const randomIndex = randomIntFromInterval(0, max_qty);
-    const newLetter = letters.at(randomIndex)?.toLowerCase();
+    const newLetter = currentLetters.at(randomIndex)?.toLowerCase();
     redirect(`/letters/${newLetter}`);
 }

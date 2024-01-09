@@ -6,16 +6,20 @@ import { randomIntFromInterval } from "@/lib/utils";
 
 type Props = {
 	letter: string;
-	letters: Array<string>;
+	defaultLetters: Array<string>;
 };
 
-export default function Letter({ letter, letters }: Props) {
+export default function Letter({ letter, defaultLetters }: Props) {
 	const [tempLetter, setTempLetter] = useState(letter);
 
 	const clickSetLetter = () => {
-		const max_qty = letters.length - 1;
+		const lsLetters = localStorage.getItem("bbl.letters");
+		const currentLetters = lsLetters ? JSON.parse(lsLetters) : defaultLetters;
+		localStorage.setItem("bbl.letters", JSON.stringify(currentLetters));
+
+		const max_qty = currentLetters.length - 1;
 		const randomIndex = randomIntFromInterval(0, max_qty);
-		const newLetter = letters.at(randomIndex)?.toLowerCase();
+		const newLetter = currentLetters.at(randomIndex)?.toLowerCase();
 		if (newLetter === undefined) return;
 		setTempLetter(newLetter);
 		window.history.pushState({}, "", "/letters/" + newLetter);
