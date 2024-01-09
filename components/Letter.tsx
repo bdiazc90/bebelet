@@ -2,25 +2,23 @@
 
 import { useState } from "react";
 
-function randomIntFromInterval(min: number, max: number): number {
-	return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+import { randomIntFromInterval } from "@/lib/utils";
 
 type Props = {
 	letter: string;
+	letters: Array<string>;
 };
 
-export default function Letter({ letter }: Props) {
+export default function Letter({ letter, letters }: Props) {
 	const [tempLetter, setTempLetter] = useState(letter);
 
 	const clickSetLetter = () => {
-		const newLetter = letters.at(randomIntFromInterval(0, 25))?.toLowerCase();
-		if (newLetter !== undefined) {
-			setTempLetter(newLetter);
-			window.history.pushState({}, "", '/letters/' + newLetter);
-		}
+		const max_qty = letters.length - 1;
+		const randomIndex = randomIntFromInterval(0, max_qty);
+		const newLetter = letters.at(randomIndex)?.toLowerCase();
+		if (newLetter === undefined) return;
+		setTempLetter(newLetter);
+		window.history.pushState({}, "", "/letters/" + newLetter);
 	};
 
 	return (

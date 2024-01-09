@@ -1,12 +1,13 @@
 import { redirect } from 'next/navigation';
 
-function randomIntFromInterval(min: number, max: number): number {
-	return Math.floor(Math.random() * (max - min + 1) + min);
-}
+import { all_numbers } from '@/lib/data';
+import { randomIntFromInterval } from '@/lib/utils';
 
-const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const numbers = all_numbers;
+const max_qty = numbers.length - 1;
 
 export default function PageNumbers() {
-    const newNumber = numbers.at(randomIntFromInterval(0, 10));
+    const randomIndex = randomIntFromInterval(0, max_qty);
+    const newNumber = numbers.at(randomIndex);
     redirect(`/numbers/${newNumber}`);
 }

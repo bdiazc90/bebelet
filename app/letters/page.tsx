@@ -1,12 +1,13 @@
 import { redirect } from 'next/navigation';
 
-function randomIntFromInterval(min: number, max: number): number {
-	return Math.floor(Math.random() * (max - min + 1) + min);
-}
+import { all_letters } from '@/lib/data';
+import { randomIntFromInterval } from '@/lib/utils';
 
-const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+const letters = all_letters;
+const max_qty = letters.length - 1;
 
 export default function PageLetters() {
-    const newLetter = letters.at(randomIntFromInterval(0, 25))?.toLowerCase();
+    const randomIndex = randomIntFromInterval(0, max_qty);
+    const newLetter = letters.at(randomIndex)?.toLowerCase();
     redirect(`/letters/${newLetter}`);
 }
