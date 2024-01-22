@@ -4,12 +4,15 @@ import { useState } from "react";
 
 import { randomIntFromInterval } from "@/lib/utils";
 
+import { useLanguageStore } from "@/store/zustand";
+
 type Props = {
 	letter: string;
 	defaultLetters: Array<string>;
 };
 
 export default function Letter({ letter, defaultLetters }: Props) {
+	const languageStore = useLanguageStore();
 	const [tempLetter, setTempLetter] = useState(letter);
 
 	const clickSetLetter = () => {
@@ -28,6 +31,7 @@ export default function Letter({ letter, defaultLetters }: Props) {
 	return (
 		<div className="w-full cursor-pointer" onClick={clickSetLetter}>
 			<h1 className="text-[50vh]/[0.8] lg:text-[80vh]/[0.8] text-center select-none font-extrabold drop-shadow-[0px_0px_10px_#edaeff] text-blue-950 dark:drop-shadow-[0px_0px_10px_#5a1599] dark:text-yellow-50">{tempLetter.toUpperCase()}</h1>
+			<h6 className="text-center">{languageStore.language}</h6>
 		</div>
 	);
 }
